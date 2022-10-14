@@ -33,8 +33,7 @@ const verifyCallback = (username, password, done) => {
 
 // verify callback with google
 const verifyCallbackGoogle = (accessToken, refreshToken, profile, done) => {
-  console.log(profile._json.email);
-  User.findOne({ googleId: profile.id }, (err, user) => {
+  User.findOne({ googleId: profile.id }, async (err, user) => {
     if (err) {
       return done(err);
     }
@@ -46,13 +45,13 @@ const verifyCallbackGoogle = (accessToken, refreshToken, profile, done) => {
         admin: false,
         email: profile?._json.email,
         accountInfo: {
-          email: profile?._json.email,
-          firstName: profile?._json.given_name,
-          lastName: profile?._json.family_name,
-          avatar: profile?._json.picture,
+          email: profile?._json?.email,
+          firstName: profile?._json?.given_name,
+          lastName: profile?._json?.family_name,
+          avatar: profile?._json?.picture,
         },
       });
-      newUser.save((err) => {
+      await newUser.save((err) => {
         if (err) {
           return done(err);
         }
