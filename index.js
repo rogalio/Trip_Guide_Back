@@ -5,10 +5,8 @@ const passport = require("passport");
 const crypto = require("crypto");
 const MongoStore = require("connect-mongo")(session);
 const Auth = require("./routes/Auth");
-//tet
 const connections = require("./config/database");
 const User = connections.models.User;
-
 const cors = require("cors");
 require("dotenv").config();
 
@@ -52,9 +50,7 @@ app.use(passport.session());
 
 app.use((req, res, next) => {
   console.log(req.session);
-
   console.log(req.user, "user");
-
   next();
 });
 

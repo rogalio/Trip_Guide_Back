@@ -12,10 +12,25 @@ const connection = mongoose.createConnection(conn, {
 // Creates simple schema for a User.
 const UserSchema = new mongoose.Schema({
   email: {
-    type: String,
-    required: true,
+    type: String || Null,
+
     unique: true,
   },
+  accountInfo: {
+    email: {
+      type: String || Null,
+    },
+    firstName: {
+      type: String || Null,
+    },
+    lastName: {
+      type: String || Null,
+    },
+    avatar: {
+      type: String || Null,
+    },
+  },
+  googleId: String || Null,
   admin: Boolean,
   hash: String,
   salt: String,
