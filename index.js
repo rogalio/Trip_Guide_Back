@@ -5,6 +5,8 @@ const passport = require("passport");
 const crypto = require("crypto");
 const MongoStore = require("connect-mongo")(session);
 const Auth = require("./routes/Auth");
+const Payment = require("./routes/Payment");
+
 const connections = require("./config/database");
 const User = connections.models.User;
 const cors = require("cors");
@@ -56,6 +58,7 @@ app.use(passport.session());
 
 // routes
 app.use(Auth);
+app.use(Payment);
 
 app.get("/", (req, res) => {
   res.send("Hello !");
