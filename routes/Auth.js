@@ -4,8 +4,10 @@ const passport = require("passport");
 const generatePassword = require("../lib/passwordUtils").generatePassword;
 const connection = require("../config/database");
 const User = connection.models.User;
-const isAuth = require("../routes/isAuthenticated").isAuth;
-const isAdmin = require("../routes/isAuthenticated").isAdmin;
+const isAuth = require("./IsAuthenticated").isAuth;
+const isAdmin = require("./IsAuthenticated").isAdmin;
+// const isAuth = require("../routes/isAuthenticated").isAuth;
+// const isAdmin = require("../routes/isAuthenticated").isAdmin;
 
 // login route with email & password  authentication
 router.post("/login", (req, res, next) => {
