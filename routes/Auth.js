@@ -1,3 +1,4 @@
+const { json } = require("body-parser");
 const express = require("express");
 const router = require("express").Router();
 const passport = require("passport");
@@ -25,7 +26,7 @@ router.post("/login", (req, res, next) => {
         if (err) {
           return next(err);
         }
-        return res.status(200).json({ message: "Login successful" });
+        return res.status(200).json({ message: "Login successful" ,test :req.isAuthenticated() });
       });
     })(req, res, next);
   } catch (error) {
@@ -82,6 +83,13 @@ router.post("/register", async (req, res, next) => {
     res.status(500).json({ message: "Server error" });
   }
 });
+
+
+//test
+router.get("/test", isAuth, (req, res, next) => {
+  res.json({ message: "You are authorized" });
+});
+
 
 // protected route
 router.get("/protected", isAuth, (req, res, next) => {

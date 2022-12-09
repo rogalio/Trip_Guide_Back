@@ -1,3 +1,5 @@
+const isAuth = require("./IsAuthenticated").isAuth;
+
 require("dotenv").config();
 const router = require("express").Router();
 
@@ -33,7 +35,7 @@ router.post("/hotel/pay", async (req, res) => {
   }
 });
 
-router.post("/flight/pay", async (req, res) => {
+router.post("/flight/pay",  async (req, res) => {
   try {
     let { amount } = req.body;
     amount = amount * 100;

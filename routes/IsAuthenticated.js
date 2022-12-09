@@ -2,7 +2,9 @@ module.exports.isAuth = (req, res, next) => {
   if (req.isAuthenticated()) {
     return next();
   }
-  res.redirect("/login");
+  res.status(400).json({ message: "You are not authorized" });
+  
+ 
 };
 
 module.exports.isAdmin = (req, res, next) => {
