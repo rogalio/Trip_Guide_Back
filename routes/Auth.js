@@ -7,8 +7,7 @@ const connection = require("../config/database");
 const User = connection.models.User;
 const isAuth = require("./IsAuthenticated").isAuth;
 const isAdmin = require("./IsAuthenticated").isAdmin;
-// const isAuth = require("../routes/isAuthenticated").isAuth;
-// const isAdmin = require("../routes/isAuthenticated").isAdmin;
+
 
 // login route with email & password  authentication
 router.post("/login", (req, res, next) => {
@@ -26,7 +25,8 @@ router.post("/login", (req, res, next) => {
         if (err) {
           return next(err);
         }
-        return res.status(200).json({ message: "Login successful" ,test :req.isAuthenticated() });
+       
+        return res.status(200).json({ message: "Login successful" ,test :req.isAuthenticated(), sid: req.sessionID });
       });
     })(req, res, next);
   } catch (error) {
@@ -35,21 +35,26 @@ router.post("/login", (req, res, next) => {
   }
 });
 
+
+
 // login with google route
 router.get(
   "/auth/google",
   passport.authenticate("google", { scope: ["profile", "email"] })
+  
+ 
 );
 
 router.get(
   "/auth/google/callback",
   passport.authenticate("google", {
     failureRedirect: "/login",
-    successRedirect: "/",
   }),
   function (req, res) {
     // Successful authentication, redirect home.
     res.redirect("/");
+    console.log("google login successful");
+
   }
 );
 
@@ -85,8 +90,30 @@ router.post("/register", async (req, res, next) => {
 });
 
 
+router.get("/login/success", (req, res) => {
+  if (req.user) {
+    res.status(200).json({
+      success: true,
+      message: "user has successfully authenticated",
+      user: req.user,
+      cookies: req.cookies,
+    });
+  } 
+});
+
+
+// is authenticated route
+router.get("/isAuthenticated", (req, res) => {
+  console.log(req.isAuthenticated());
+  if (req.isAuthenticated()) {
+    res.status(200).json({ message: "You are authorized" });
+  } else {
+    res.status(401).json({ message: "You are not authorized" });
+  }
+});
+
 //test
-router.get("/test", isAuth, (req, res, next) => {
+router.get("/test", isAuth,  (req, res, next) => {
   res.json({ message: "You are authorized" });
 });
 
@@ -108,6 +135,7 @@ router.get("/logout", (req, res, next) => {
       return next(err);
     }
     res.redirect("/");
+
   });
 });
 

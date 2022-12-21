@@ -38,6 +38,7 @@ const verifyCallbackGoogle = (accessToken, refreshToken, profile, done) => {
       return done(err);
     }
     if (user) {
+      console.log("user found");
       return done(null, user);
     } else {
       const newUser = new User({
@@ -51,6 +52,8 @@ const verifyCallbackGoogle = (accessToken, refreshToken, profile, done) => {
           avatar: profile?._json?.picture,
         },
       });
+    
+      console.log("new user created");
       await newUser.save((err) => {
         if (err) {
           return done(err);

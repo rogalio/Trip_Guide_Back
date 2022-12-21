@@ -38,9 +38,9 @@ router.post("/hotel/pay", async (req, res) => {
 router.post("/flight/pay",  async (req, res) => {
   try {
     let { amount } = req.body;
-    amount = amount * 100;
+     
     const payment = await stripe.paymentIntents.create({
-      amount,
+      amount : Math.round(amount),
       currency: "EUR",
     });
     res.status(200).json({
