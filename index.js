@@ -17,11 +17,11 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT;
 app.use(cors({
-  origin: "https://tripguideback-production.up.railway.app",
+  origin: "https://trip-guide-gamma.vercel.app",
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
   
-  sameSite: "none",
+  
 }));
 app.set("trust proxy", 1);
 app.use(express.json());
@@ -45,7 +45,7 @@ const sessionStore = new MongoStore({
 
 app.use(
   session({
-   sameSite: "none",
+   
     name: "sid",
     secret: process.env.SECRET,
     resave: false,
