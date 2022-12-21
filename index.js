@@ -18,12 +18,9 @@ const app = express();
 const port = process.env.PORT;
 app.use(cors({
   origin: "https://trip-guide-gamma.vercel.app",
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
-  
-  
 }));
-app.set("trust proxy", 1);
+// app.set("trust proxy", 1);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -53,7 +50,8 @@ app.use(
     store: sessionStore,
     cookie: {
       maxAge: 1000 * 60 * 60 * 24, // 1 day
-     
+     // test
+     secure: true
     },
   
   })
