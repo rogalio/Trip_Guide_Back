@@ -20,7 +20,8 @@ app.use(cors({
   origin: "https://trip-guide-gamma.vercel.app",
   credentials: true,
 }));
-// app.set("trust proxy", 1);
+// test
+app.set("trust proxy", 1);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
