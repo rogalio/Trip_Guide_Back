@@ -17,23 +17,13 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT;
 app.use(cors({
-  // origin:  'http://localhost:3000' , 
-  // origin: (origin, callback) => {
-  //   if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-  //     callback(null, true);
-  //   } else {
-  //     callback(new Error('Origin not allowed by CORS'));
-  //   }
-  // },
-  origin: "https://trip-guide-gamma.vercel.app",
+  origin: "https://tripguideback-production.up.railway.app",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   credentials: true,
-  accessControlAllowOrigin: "https://trip-guide-gamma.vercel.app",
-  accessControlAllowCredentials: true,
-  sameSite: "none",
-  // allow https 
-
   
+  sameSite: "none",
 }));
+app.set("trust proxy", 1);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -55,7 +45,8 @@ const sessionStore = new MongoStore({
 
 app.use(
   session({
-    // name: "sid",
+   sameSite: "none",
+    name: "sid",
     secret: process.env.SECRET,
     resave: false,
     saveUninitialized: true,
