@@ -14,7 +14,6 @@ router.post("/login", (req, res, next) => {
   try {
     passport.authenticate("local", (err, user, info) => {
       if (err) {
-        console.log(err);
         return next(err);
       }
       if (!user) {
@@ -27,11 +26,10 @@ router.post("/login", (req, res, next) => {
           return next(err);
         }
        
-        return res.status(200).json({ message: "Login successful" ,test :req.isAuthenticated(), sid: req.sessionID });
+        return res.status(200).json({ message: "Login successful" ,test :req.isAuthenticated() });
       });
     })(req, res, next);
   } catch (error) {
-    console.log(error);
     res.status(500).json({ message: "Server error" });
   }
 });
@@ -52,7 +50,6 @@ router.get(
     failureRedirect: "/login",
   }),
   function (req, res) {
-    // Successful authentication, redirect home.
     res.redirect("/");
     console.log("google login successful");
 
@@ -85,7 +82,6 @@ router.post("/register", async (req, res, next) => {
         .catch((err) => res.send(err));
     }
   } catch (error) {
-    console.log(error);
     res.status(500).json({ message: "Server error" });
   }
 });

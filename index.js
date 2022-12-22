@@ -10,7 +10,7 @@ const connections = require("./config/database");
 const User = connections.models.User;
 const cors = require("cors");
 
-// const allowedOrigins = ['http://localhost:3000', 'https://trip-guide-rogalio.vercel.app'];
+
 require("dotenv").config();
 
 // run express
@@ -21,7 +21,7 @@ app.use(cors({
   credentials: true,
   saveUninitialized: true,
 }));
-// test
+
 app.set("trust proxy", 1);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -54,8 +54,6 @@ app.use(
 
      secure: true,
      sameSite : "none",
-    //  test 
-    proxy: true
 
     },
   })
