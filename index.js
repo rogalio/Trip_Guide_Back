@@ -17,7 +17,7 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT;
 app.use(cors({
-  origin: "https://trip-guide-gamma.vercel.app/",
+  origin: "https://trip-guide-gamma.vercel.app",
   credentials: true,
 }));
 // test
