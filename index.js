@@ -19,6 +19,7 @@ const port = process.env.PORT;
 app.use(cors({
   origin: "https://trip-guide-gamma.vercel.app",
   credentials: true,
+  saveUninitialized: true,
 }));
 // test
 app.set("trust proxy", 1);
@@ -47,6 +48,7 @@ app.use(
     name: "sid",
     secret: process.env.SECRET,
     resave: false,
+    //test
     saveUninitialized: true,
     store: sessionStore,
     cookie: {
