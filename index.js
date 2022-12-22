@@ -19,7 +19,6 @@ const port = process.env.PORT;
 app.use(cors({
   origin: "https://trip-guide-gamma.vercel.app",
   credentials: true,
-  saveUninitialized: true,
 }));
 
 app.set("trust proxy", 1);
@@ -44,17 +43,14 @@ const sessionStore = new MongoStore({
 
 app.use(
   session({
-   
     name: "sid",
     secret: process.env.SECRET,
     resave: false,
     store: sessionStore,
     cookie: {
       maxAge: 1000 * 60 * 60 * 24, // 1 day
-
      secure: true,
      sameSite : "none",
-
     },
   })
 );
