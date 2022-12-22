@@ -48,14 +48,14 @@ app.use(
     name: "sid",
     secret: process.env.SECRET,
     resave: false,
-    //test
-    saveUninitialized: true,
     store: sessionStore,
     cookie: {
       maxAge: 1000 * 60 * 60 * 24, // 1 day
-     // test
+
      secure: true,
      sameSite : "none"
+
+
     },
   })
 );
@@ -65,11 +65,11 @@ require("./config/passport");
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.use((req, res, next) => {
-//   console.log(req.session);
-//   console.log(req.user, "user");
-//   next();
-// });
+app.use((req, res, next) => {
+  console.log(req.session);
+  console.log(req.user, "user");
+  next();
+});
 
 // routes
 app.use(Auth);
