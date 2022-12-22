@@ -21,7 +21,7 @@ app.use(cors({
   credentials: true,
 }));
 // test
-// app.set("trust proxy", 1);
+app.set("trust proxy", 1);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -50,7 +50,7 @@ app.use(
     saveUninitialized: true,
     store: sessionStore,
     cookie: {
-      maxAge: 1000 * 60 * 60 * 24, // 1 day
+      // maxAge: 1000 * 60 * 60 * 24, // 1 day
      // test
      secure: true,
      sameSite : "none"
