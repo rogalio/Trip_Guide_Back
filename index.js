@@ -10,6 +10,8 @@ const Payment = require("./routes/Payment");
 const connections = require("./config/database");
 const User = connections.models.User;
 const cors = require("cors");
+const { Domain } = require("domain");
+const { domainToASCII } = require("url");
 // const allowedOrigins = ['http://localhost:3000', 'https://trip-guide-rogalio.vercel.app'];
 require("dotenv").config();
 
@@ -17,7 +19,7 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT;
 app.use(cors({
-  origin: "https://trip-guide-gamma.vercel.app",
+  origin: "http://localhost:3000",
   credentials: true,
 }));
 // test
@@ -54,6 +56,7 @@ app.use(
      // test
      secure: true,
      sameSite : "none"
+     
     },
   
   })
