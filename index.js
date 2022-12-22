@@ -6,12 +6,10 @@ const crypto = require("crypto");
 const MongoStore = require("connect-mongo")(session);
 const Auth = require("./routes/Auth");
 const Payment = require("./routes/Payment");
-
 const connections = require("./config/database");
 const User = connections.models.User;
 const cors = require("cors");
-const { Domain } = require("domain");
-const { domainToASCII } = require("url");
+
 // const allowedOrigins = ['http://localhost:3000', 'https://trip-guide-rogalio.vercel.app'];
 require("dotenv").config();
 
@@ -55,7 +53,7 @@ app.use(
       maxAge: 1000 * 60 * 60 * 24, // 1 day
      // test
     //  secure: true,
-     sameSite : "none"
+    //  sameSite : "none"
      
     },
   
